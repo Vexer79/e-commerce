@@ -9,3 +9,16 @@
 .scrollbar-hide {
     scrollbar-width: none;
 }
+
+.custom-arrow {
+    appearance: none;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMCA3LjMzbDIuODI5LTIuODMgOS4xNzUgOS4zMzkgOS4xNjctOS4zMzkgMi44MjkgMi44My0xMS45OTYgMTIuMTd6IiBmaWxsPSIjNzA3MDcwIi8+PC9zdmc+");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem top 50%;
+    background-size: 0.65rem auto;
+    padding-right: 35px;
+}
+
+.custom-arrow select::-ms-expand {
+    display: none;
+}
