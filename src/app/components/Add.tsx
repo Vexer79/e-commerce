@@ -20,14 +20,14 @@ const Add = () => {
                     <div className="bg-gray-100 py-2 px-4 rounded-3xl flex items-center justify-between w-32">
                         <button
                             className="cursor-pointer text-xl select-none"
-                            onClick={() => handleQuantity.decrease()}
+                            onClick={handleQuantity.decrease}
                         >
                             -
                         </button>
                         {quantity}
                         <button
                             className="cursor-pointer text-xl select-none"
-                            onClick={() => handleQuantity.increase()}
+                            onClick={handleQuantity.increase}
                         >
                             +
                         </button>
