@@ -1,6 +1,6 @@
-import CategoryList from "./components/CategoryList";
-import ProductList from "./components/ProductList";
-import Slider from "./components/Slider";
+import CategoryList from "../components/CategoryList";
+import ProductList from "../components/ProductList";
+import Slider from "../components/Slider";
 
 const HomePage = () => {
     return (
