@@ -6,7 +6,15 @@ import DOMPurify from "isomorphic-dompurify";
 
 const PRODUCT_PER_PAGE = 20;
 
-const ProductList = async ({ categoryId, limit }: { categoryId: string; limit?: number }) => {
+const ProductList = async ({
+    categoryId,
+    limit,
+    searchParams,
+}: {
+    categoryId: string;
+    limit?: number;
+    searchParams?: any;
+}) => {
     const wixClient = await wixClientServer();
     const res = await wixClient.products
         .queryProducts()
@@ -51,9 +59,9 @@ const ProductList = async ({ categoryId, limit }: { categoryId: string; limit?: 
                                 className="text-sm text-gray-500"
                                 dangerouslySetInnerHTML={{
                                     __html: DOMPurify.sanitize(
-                                        item.additionalInfoSections?.find(
-                                            (section: any) => section.title === "shortDesс"
-                                        )?.description || ""
+                                        item.additionalInfoSections?.find((section: any) => {
+                                            return section.title === "shortDesc";
+                                        })?.description || ""
                                     ),
                                 }}
                             ></div>
