@@ -16,7 +16,7 @@ const ProductList = async ({
     searchParams?: any;
 }) => {
     const wixClient = await wixClientServer();
-    const productQuery = await wixClient.products
+    let productQuery = wixClient.products
         .queryProducts()
         .startsWith("name", searchParams?.name || "")
         .eq("collectionIds", categoryId)
@@ -29,10 +29,10 @@ const ProductList = async ({
         let [sortType, sortBy] = searchParams.sort.split(" ");
 
         if (sortType === "asc") {
-            productQuery.ascending(sortBy);
+            productQuery = productQuery.ascending(sortBy);
         }
         if (sortType === "desc") {
-            productQuery.descending(sortBy);
+            productQuery = productQuery.descending(sortBy);
         }
     }
 
