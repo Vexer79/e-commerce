@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartModal from "./CartModal";
 import { useWixClient } from "@/hooks/useWixClient";
 import Cookies from "js-cookie";
+import { useCartStore } from "@/hooks/useCartStore";
 
 const NavIcons = () => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -33,8 +34,12 @@ const NavIcons = () => {
         setIsLoading(false);
         setIsProfileOpen(false);
         router.push(logoutUrl);
-
     };
+
+    const { cart, counter, getCart } = useCartStore();
+    useEffect(() => {
+        getCart(wixClient);
+    }, [wixClient, getCart]);
 
     return (
         <div className="flex items-center gap-4 xl:gap-6 relative">
@@ -49,7 +54,9 @@ const NavIcons = () => {
             {isProfileOpen && (
                 <div className="absolute p-4 rounded-md top-12 left-0 text-sm bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-20">
                     <Link href="/">Profile</Link>
-                    <div className="mt-2 cursor-pointer" onClick={handleLogout}>{isLoading ? "Logging out" : "Logout"}</div>
+                    <div className="mt-2 cursor-pointer" onClick={handleLogout}>
+                        {isLoading ? "Logging out" : "Logout"}
+                    </div>
                 </div>
             )}
             <Image
@@ -62,7 +69,7 @@ const NavIcons = () => {
             <div className="relative cursor-pointer" onClick={() => setIsCartOpen((prev) => !prev)}>
                 <Image src="/cart.png" alt="" width={22} height={22} className="cursor-pointer" />
                 <div className="absolute -top-4 -right-4 w-6 h-6 bg-notification rounded-full text-white text-sm flex items-center justify-center">
-                    2
+                    {counter}
                 </div>
             </div>
             {isCartOpen && <CartModal />}
