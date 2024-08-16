@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/js-cookie": "^3.0.6",
     "@wix/ecom": "^1.0.693",
+    "@wix/members": "^1.0.93",
     "@wix/redirects": "^1.0.51",
     "@wix/sdk": "^1.12.10",
     "@wix/stores": "^1.0.169",
@@ -20,6 +21,7 @@
     "react": "^18",
     "react-confetti": "^6.1.0",
     "react-dom": "^18",
+    "timeago.js": "^4.0.2",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
