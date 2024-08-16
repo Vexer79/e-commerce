@@ -12,8 +12,6 @@ const nextConfig = {
         ],
     },
     basePath: "/e-commerce",
-    output: "export",
-    reactStrictMode: true,
 };
 
 export default nextConfig;

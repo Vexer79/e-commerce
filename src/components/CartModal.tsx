@@ -39,7 +39,7 @@ const CartModal = () => {
                     <h2 className="text-xl">Shopping Cart</h2>
                     <div className="flex flex-col gap-8">
                         {/* ITEM */}
-                        {cart.lineItems.map((item) => (
+                        {cart.lineItems.map((item: any) => (
                             <div key={item._id} className="flex gap-4">
                                 {item.image && (
                                     <Image
