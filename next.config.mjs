@@ -11,6 +11,9 @@ const nextConfig = {
             { protocol: "https", hostname: "app-uploads-cdn.fera.ai" },
         ],
     },
+    basePath: "/e-commerce",
+    output: "export",
+    reactStrictMode: true,
 };
 
 export default nextConfig;
