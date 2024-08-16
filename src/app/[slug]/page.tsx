@@ -6,6 +6,10 @@ import { notFound } from "next/navigation";
 import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 
+export function generateStaticParams() {
+    return [{ slug: "shopper" }];
+}
+
 const SinglePage = async ({ params }: { params: { slug: string } }) => {
     const wixClient = await wixClientServer();
 
