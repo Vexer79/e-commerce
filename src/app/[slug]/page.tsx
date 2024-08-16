@@ -4,6 +4,7 @@ import CustomizeProducts from "../../components/CustomizeProducts";
 import ProductImages from "../../components/ProductImages";
 import { notFound } from "next/navigation";
 import DOMPurify from "isomorphic-dompurify";
+import Image from "next/image";
 
 const SinglePage = async ({ params }: { params: { slug: string } }) => {
     const wixClient = await wixClientServer();
@@ -13,7 +14,12 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
         return notFound();
     }
     const product = products.items[0];
-    
+
+    const reviewRes = await fetch(
+        `https://api.fera.ai/v3/public/reviews?product.id=${product._id}&public_key=${process.env.NEXT_PUBLIC_FERA_ID}`
+    );
+    const reviews = await reviewRes.json();
+
     return (
         <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-16">
             {/* IMG */}
@@ -55,7 +61,11 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
                         productOptions={product.productOptions}
                     />
                 ) : (
-                    <Add productId={product._id} variantId="00000000-000000-000000-000000000000" stockNumber={product.stock?.quantity || 0}/>
+                    <Add
+                        productId={product._id!}
+                        variantId="00000000-000000-000000-000000000000"
+                        stockNumber={product.stock?.quantity || 0}
+                    />
                 )}
                 <div className="h-[2px] bg-gray-100" />
                 {product.additionalInfoSections?.map((section: any) => (
@@ -68,6 +78,43 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
                         ></div>
                     </div>
                 ))}
+                <h1>User Reviews</h1>
+                {reviews.data.map((review: any) => {
+                    <div className="flex flex-col gap-4 font-medium" key={review.id}>
+                        {/* USER */}
+                        <div className="flex items-center gap-4 font-medium">
+                            <Image
+                                src={review.customer.avatar_url}
+                                alt=""
+                                width={32}
+                                height={32}
+                                className="rounded-full"
+                            />
+                            <span>{review.customer.display_name}</span>
+                        </div>
+                        {/* STARS */}
+                        <div className="flex gap-2">
+                            {Array.from({ length: review.rating }).map((_, index) => (
+                                <Image src="star.png" alt="" key={index} width={16} height={16} />
+                            ))}
+                        </div>
+                        {/* DESC */}
+                        {review.heading && <p>{review.heading}</p>}
+                        {review.body && <p>{review.body}</p>}
+                        <div className="">
+                            {review.media.map((media: any) => (
+                                <Image
+                                    src={media.url}
+                                    key={media.id}
+                                    alt=""
+                                    width={100}
+                                    height={50}
+                                    className="object-cover"
+                                />
+                            ))}
+                        </div>
+                    </div>;
+                })}
             </div>
         </div>
     );
