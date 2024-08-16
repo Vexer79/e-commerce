@@ -2,6 +2,10 @@ import { wixClientServer } from "@/lib/wixClientServer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export function generateStaticParams() {
+    return [{ id: '1' }, { id: '2' }, { id: '3' }]
+  }
+
 const OrderPage = async ({ params }: { params: { id: string } }) => {
     const id = params.id;
     const wixClient = await wixClientServer();
