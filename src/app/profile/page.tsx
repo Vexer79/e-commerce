@@ -6,15 +6,39 @@ import { format } from "timeago.js";
 
 const ProfilePage = async () => {
     const wixClient = await wixClientServer();
-    const user = await wixClient.members.getCurrentMember({
-        fieldsets: [members.Set.FULL],
-    });
-    if (!user.member?.contactId) {
-        return <div className="">Not logged in!</div>;
-    }
-    const orderRes = await wixClient.orders.searchOrders({
-        search: { filter: { "buyerInfo.contactId": { $eq: user.member?.contactId } } },
-    });
+    // const user = await wixClient.members.getCurrentMember({
+    //     fieldsets: [members.Set.FULL],
+    // });
+    // if (!user.member?.contactId) {
+    //     return <div className="">Not logged in!</div>;
+    // }
+    // const orderRes = await wixClient.orders.searchOrders({
+    //     search: { filter: { "buyerInfo.contactId": { $eq: user.member?.contactId } } },
+    // });
+    const user = {
+        member: {
+            contactId: "contactId",
+            profile: {
+                nickname: "Vexer69",
+            },
+            contact: {
+                firstName: "John",
+                lastName: "Doe",
+                phones: ["+123456789"],
+            },
+            loginEmail: "Vexer69@mail.to",
+        },
+    };
+    const orderRes = {
+        orders: [
+            {
+                _id: "abd442342ggfd",
+                priceSummary: { subtotal: { formattedAmount: "100zl" } },
+                _createdDate: new Date("June 24, 2024 00:00:00"),
+                status: "Completed",
+            },
+        ],
+    };
     return (
         <div className="flex flex-col md:flex-row gap-24 md:h-[calc(100vh-180px)] items-center px-4 md:px-16 xl:px-32 2xl:px-64">
             <div className="w-full md:w-1/2">
@@ -46,7 +70,10 @@ const ProfilePage = async () => {
                     <input
                         type="tel"
                         name="phone"
-                        placeholder={user.member?.contact?.phones && user.member?.contact?.phones[0] || "+123456789"}
+                        placeholder={
+                            (user.member?.contact?.phones && user.member?.contact?.phones[0]) ||
+                            "+123456789"
+                        }
                         className="ring-1 ring-gray-300 rounded-md p-2 max-w-96"
                     />
                     <label className="text-sm text-gray-700">E-mail</label>

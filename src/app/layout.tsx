@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { WixClientContextProvider } from "@/context/wixContext";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
             <body className={inter.className}>
                 <WixClientContextProvider>
                     <Navbar />
-                    {children}
+                    <Suspense>{children}</Suspense>
                     <Footer />
                 </WixClientContextProvider>
             </body>

@@ -12,6 +12,8 @@ const CartModal = () => {
 
     const handleCheckout = async () => {
         try {
+            console.log("Test");
+            
             const checkout = await wixClient.currentCart.createCheckoutFromCurrentCart({
                 channelType: currentCart.ChannelType.WEB,
             });
@@ -105,7 +107,7 @@ const CartModal = () => {
                             <button
                                 className="rounded-md py-3 px-4 bg-black text-white disabled:cursor-not-allowed disabled:opacity-75"
                                 disabled={isLoading}
-                                onClick={handleCheckout}
+                                onClick={()=>handleCheckout()}
                             >
                                 Checkout
                             </button>
