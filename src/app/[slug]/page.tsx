@@ -78,7 +78,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
                         ></div>
                     </div>
                 ))}
-                <h1>User Reviews</h1>
+                {reviews.data.length !== 0 && <h1>User Reviews</h1>}
                 {reviews.data.map((review: any) => {
                     <div className="flex flex-col gap-4 font-medium" key={review.id}>
                         {/* USER */}
