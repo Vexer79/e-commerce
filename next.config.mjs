@@ -12,7 +12,7 @@ const nextConfig = {
         ],
     },
     basePath: "/e-commerce",
-    output: "export",
+    output: "standlone",
 };
 
 export default nextConfig;
