@@ -11,7 +11,6 @@ const nextConfig = {
             { protocol: "https", hostname: "app-uploads-cdn.fera.ai" },
         ],
     },
-    output: "export",
 };
 
 export default nextConfig;
