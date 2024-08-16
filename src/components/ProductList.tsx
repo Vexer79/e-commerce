@@ -91,11 +91,13 @@ const ProductList = async ({
                     </Link>
                 );
             })}
-            <Pagination
-                currentPage={res.currentPage || 0}
-                hasPrev={res.hasPrev()}
-                hasNext={res.hasNext()}
-            />
+            {searchParams?.cat || searchParams?.name ? (
+                <Pagination
+                    currentPage={res.currentPage || 0}
+                    hasPrev={res.hasPrev()}
+                    hasNext={res.hasNext()}
+                />
+            ) : null}
         </div>
     );
 };
