@@ -1,3 +1,4 @@
+import { updateUser } from "@/lib/actions";
 import { wixClientServer } from "@/lib/wixClientServer";
 import { members } from "@wix/members";
 import Link from "next/link";
@@ -9,7 +10,7 @@ const ProfilePage = async () => {
         fieldsets: [members.Set.FULL],
     });
     if (!user.member?.contactId) {
-        <div className="">Not logged in!</div>;
+        return <div className="">Not logged in!</div>;
     }
     const orderRes = await wixClient.orders.searchOrders({
         search: { filter: { "buyerInfo.contactId": { $eq: user.member?.contactId } } },
@@ -18,7 +19,8 @@ const ProfilePage = async () => {
         <div className="flex flex-col md:flex-row gap-24 md:h-[calc(100vh-180px)] items-center px-4 md:px-16 xl:px-32 2xl:px-64">
             <div className="w-full md:w-1/2">
                 <h1 className="text-2xl">Profile</h1>
-                <form action="" className="mt-12 flex flex-col gap-4">
+                <form action={updateUser} className="mt-12 flex flex-col gap-4">
+                    <input type="text" name="id" hidden value={user.member.contactId} />
                     <label className="text-sm text-gray-700">Username</label>
                     <input
                         type="text"
